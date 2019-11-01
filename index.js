@@ -1,7 +1,7 @@
 import express from 'express';
 // import bodyParser from 'body-parser';
 
-import { makeExecutableSchema } from 'graphql-tools';
+// import { makeExecutableSchema } from 'graphql-tools';
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
@@ -14,12 +14,11 @@ const PATH = '/graphql';
 
 const app = express();
 
-const schema = makeExecutableSchema({
+const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: { models },
 });
-
-const server = new ApolloServer({ schema });
 server.applyMiddleware({ app });
 
 app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:4000${PATH}`));
