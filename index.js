@@ -17,8 +17,19 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: { models },
+  playground: false,
+  context: async ({ req, models }) => {
+    if (models) {
+      // check connection for metadata
+      return models.context;
+    }
+    // check from req
+    const token = req.headers.authorization || '';
+    console.log(token);
+    return { token };
+  },
 });
+
 server.applyMiddleware({ app });
 
 app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:4000${PATH}`));
