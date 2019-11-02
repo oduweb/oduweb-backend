@@ -8,10 +8,7 @@ export default (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       title: DataTypes.STRING,
-      content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
+      content: DataTypes.TEXT,
     },
     {
       freezeTableName: true,
@@ -19,7 +16,12 @@ export default (sequelize, DataTypes) => {
   );
 
   Post.associate = (models) => {
-    Post.belongsTo(models.User);
+    Post.belongsTo(models.User, {
+      foreignKey: {
+        name: 'userId',
+        field: 'userId',
+      },
+    });
   };
 
   return Post;

@@ -1,11 +1,15 @@
 import express from 'express';
+import path from 'path';
+import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+import models from './models';
+
 // import bodyParser from 'body-parser';
 
 // import { makeExecutableSchema } from 'graphql-tools';
 
-import typeDefs from './schema';
-import resolvers from './resolvers';
-import models from './models';
+const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
+
+const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
 
 const { ApolloServer } = require('apollo-server-express');
 
@@ -17,17 +21,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: false,
-  context: async ({ req, models }) => {
-    if (models) {
-      // check connection for metadata
-      return models.context;
-    }
-    // check from req
-    const token = req.headers.authorization || '';
-    console.log(token);
-    return { token };
-  },
+  context: { models },
 });
 
 server.applyMiddleware({ app });
