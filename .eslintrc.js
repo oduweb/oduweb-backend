@@ -4,6 +4,7 @@ module.exports = {
         "import"
     ],
     "rules": {
-        "no-unused-vars": "error"
+        "no-console": "off",
+        "no-unused-vars": "off",
     },
 };

@@ -21,7 +21,14 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: { models },
+  playground: {
+    settings: {
+      'schema.polling.enable': false,
+    },
+  },
+  introspection: true,
+  context: { models, user: { Id: 1 } },
+  tracing: true,
 });
 
 server.applyMiddleware({ app });
