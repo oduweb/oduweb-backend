@@ -37,6 +37,10 @@ server.applyMiddleware({ app });
 
 app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${PATH}`));
 
-models.sequelize.sync({}).then(() => {
+/* sync =>
+force : Siler ve yeni tablo oluşturur.
+alter: Silmeden değişiklikler yapar.
+*/
+models.sequelize.sync({ alter: true }).then(() => {
   app.listen(8082);
 });

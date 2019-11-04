@@ -9,6 +9,9 @@ export default (sequelize, DataTypes) => {
       },
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
+      userName: DataTypes.STRING,
+      password: DataTypes.STRING,
+      email: DataTypes.STRING,
     },
     {
       freezeTableName: true,

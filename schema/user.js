@@ -3,6 +3,9 @@ export default `
     Id: Int!
     firstName: String!
     lastName: String!
+    userName: String!
+    password: String!
+    email: String!
     posts: [Post!]!
   }
 
@@ -12,6 +15,6 @@ export default `
   }
 
   type Mutation {
-    createUser(firstName: String!, lastName: String!): User!
+    registerUser(firstName: String!, lastName: String!, userName: String!, password: String!, email: String!): Boolean!
   }
 `;
