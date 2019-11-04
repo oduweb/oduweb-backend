@@ -1,8 +1,8 @@
 import express from 'express';
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+import cors from 'cors';
 import models from './models';
-
 // import bodyParser from 'body-parser';
 
 // import { makeExecutableSchema } from 'graphql-tools';
@@ -13,10 +13,12 @@ const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers'))
 
 const { ApolloServer } = require('apollo-server-express');
 
-const PORT = 4000;
+const PORT = 8081;
 const PATH = '/graphql';
 
 const app = express();
+
+app.use(cors('*'));
 
 const server = new ApolloServer({
   typeDefs,
@@ -33,8 +35,8 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:4000${PATH}`));
+app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${PATH}`));
 
 models.sequelize.sync({}).then(() => {
-  app.listen(8081);
+  app.listen(8082);
 });
