@@ -7,6 +7,9 @@ import models from './models';
 
 // import { makeExecutableSchema } from 'graphql-tools';
 
+const SECRET = 'ashdbflaksjdbflakjsdfa';
+const SECRET2 = 'akşsjfşakjsfnşaksfşaksda';
+
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
@@ -29,7 +32,9 @@ const server = new ApolloServer({
     },
   },
   introspection: true,
-  context: { models, user: { Id: 1 } },
+  context: {
+    models, user: { Id: 1 }, SECRET, SECRET2,
+  },
   tracing: true,
 });
 
