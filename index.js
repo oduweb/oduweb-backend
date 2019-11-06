@@ -52,7 +52,6 @@ const server = new ApolloServer({
       'schema.polling.enable': false,
     },
   },
-  introspection: true,
   context: ({ req }) => ({
     models,
     user: req.user,
