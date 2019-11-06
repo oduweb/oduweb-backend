@@ -12,7 +12,12 @@ export default `
     getPost(Id: Int!): Post!
   }
 
+  type CreatePostResponse {
+    ok: Boolean!
+    errors: [Error!]
+  }
+  
   type Mutation {
-    createPost(userId: Int!, title: String!, content: String!): Boolean!
+    createPost(userId: Int!, title: String!, content: String!): CreatePostResponse!
   }
 `;

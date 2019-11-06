@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import formatErrors from '../formatErrors';
 
 export default {
   Post: {
@@ -8,12 +10,18 @@ export default {
     getPost: (parent, { Id }, { models }) => models.Post.findOne({ where: { Id } }),
   },
   Mutation: {
-    createPost: async (parent, args, { models }) => {
+    createPost: async (parent, args, { models, user }) => {
       try {
-        await models.Post.create(args);
-        return true;
+        await models.Post.create({ ...args, userId: user.Id });
+        return {
+          ok: true,
+        };
       } catch (err) {
-        throw new Error(err);
+        console.log(err);
+        return {
+          ok: false,
+          erros: formatErrors(err),
+        };
       }
     },
   },

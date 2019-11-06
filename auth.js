@@ -3,6 +3,7 @@ import _ from 'lodash';
 import bcrypt from 'bcrypt';
 
 export const createTokens = async (user, secret, secret2) => {
+  console.log('Geldi', user, secret, secret2);
   const createToken = jwt.sign(
     {
       user: _.pick(user, ['Id']),
@@ -26,8 +27,8 @@ export const createTokens = async (user, secret, secret2) => {
   return [createToken, createRefreshToken];
 };
 
-export const refreshTokens = async (token, refreshToken, models, SECRET) => {
-  let userId = -1;
+export const refreshTokens = async (token, refreshToken, models, SECRET, SECRET2) => {
+  let userId = 0;
   try {
     const { user: { Id } } = jwt.decode(refreshToken);
     userId = Id;
@@ -45,13 +46,15 @@ export const refreshTokens = async (token, refreshToken, models, SECRET) => {
     return {};
   }
 
+  const refreshSecret = user.password + SECRET2;
+
   try {
-    jwt.verify(refreshToken, user.refreshSecret);
+    jwt.verify(refreshToken, refreshSecret);
   } catch (err) {
     return {};
   }
 
-  const [newToken, newRefreshToken] = await createTokens(user, SECRET, user.refreshSecret);
+  const [newToken, newRefreshToken] = await createTokens(user, SECRET, refreshSecret);
   return {
     token: newToken,
     refreshToken: newRefreshToken,
