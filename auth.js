@@ -3,7 +3,6 @@ import _ from 'lodash';
 import bcrypt from 'bcrypt';
 
 export const createTokens = async (user, secret, secret2) => {
-  console.log('Geldi', user, secret, secret2);
   const createToken = jwt.sign(
     {
       user: _.pick(user, ['Id']),
@@ -63,6 +62,10 @@ export const refreshTokens = async (token, refreshToken, models, SECRET, SECRET2
 };
 
 export const tryLogin = async (email, password, models, SECRET, SECRET2) => {
+  console.log(email, password);
+
+  // LDAP
+
   const user = await models.User.findOne({ where: { email }, raw: true });
   if (!user) {
     // user with provided email not found

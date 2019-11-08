@@ -3,11 +3,35 @@ import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import winston from 'winston';
 import models from './models';
 import { refreshTokens } from './auth';
 
 const SECRET = 'ashdbflaksjdbflakjsdfa';
 const SECRET2 = 'akşsjfşakjsfnşaksfşaksda';
+
+const logConfiguration = {
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({
+      filename: './logs/example-2.log',
+    }),
+  ],
+};
+
+const logger = winston.createLogger(logConfiguration);
+
+const d = new Date();
+
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+logger.log({
+  Time: `[${days[d.getDay()].substring(0, 3)}, ${d.getDay()}, ${months[d.getMonth()].substring(0, 3)}, ${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} GTM]`,
+  user: '[0]Administrator',
+  message: 'Server starting..',
+  level: 'info',
+});
+
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 

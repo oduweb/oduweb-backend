@@ -7,7 +7,17 @@ export default {
     users: (parent) => parent.getUser(),
   },
   Query: {
-    allPosts: (parent, args, { models }) => models.Post.findAll(),
+    allPosts: requiresAuth.createResolver(async (parent, args, { models }) => {
+      try {
+        return await models.Post.findAll();
+      } catch (err) {
+        console.log(err);
+        return {
+          ok: false,
+          erros: formatErrors(err),
+        };
+      }
+    }),
     getPost: (parent, { Id }, { models }) => models.Post.findOne({ where: { Id } }),
   },
   Mutation: {

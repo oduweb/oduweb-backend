@@ -2,11 +2,13 @@ import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize('newDeepJupiter', 'postgres', '123qaz', {
   dialect: 'postgres',
+  logging: false,
 });
 
 const models = {
   User: sequelize.import('./user'),
   Post: sequelize.import('./post'),
+  Wot: sequelize.import('./wot'),
 };
 
 Object.keys(models).forEach((modelName) => {

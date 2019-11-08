@@ -22,6 +22,7 @@ export default (sequelize, DataTypes) => {
         field: 'userId',
       },
     });
+    Post.hasMany(models.Wot);
   };
 
   return Post;

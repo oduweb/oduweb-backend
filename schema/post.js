@@ -16,7 +16,7 @@ export default `
     ok: Boolean!
     errors: [Error!]
   }
-  
+
   type Mutation {
     createPost(userId: Int!, title: String!, content: String!): CreatePostResponse!
   }

@@ -10,6 +10,7 @@ const createResolver = (resolver) => {
   return baseResolver;
 };
 
+
 // requiresAuth
 export default createResolver((parent, args, { user }) => {
   if (!user || !user.Id) {
