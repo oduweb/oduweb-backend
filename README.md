@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to oduweb-backend ? 👋</h1>
+<h1 align="center">Welcome to oduweb-backend 👋</h1>
 <p align="center">
   <img src="https://img.shields.io/badge/npm-v6.9.0-blue" />
   <img src="https://img.shields.io/badge/node-v10.16.3-red" />
