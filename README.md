@@ -1,19 +1,20 @@
-<h1 align="center">Welcome to oduweb-backend 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.0.1-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
+<h1 align="center">Welcome to oduweb-backend ? 👋</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/npm-v6.9.0-blue" />
+  <img src="https://img.shields.io/badge/node-v10.16.3-red" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/oduweb/oduweb-backend">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/oduweb/oduweb-backend">
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/oduweb/oduweb-backend/total">
+  <a href="https://github.com/oduweb/oduweb-backend/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" target="_blank" />
   </a>
   <a href="https://twitter.com/TolgahanUmut" target="_blank">
     <img alt="Twitter: TolgahanUmut" src="https://img.shields.io/twitter/follow/TolgahanUmut.svg?style=social" />
   </a>
 </p>
 
-> For ordu university
-
-### 🏠 [Homepage](app.odu.edu.tr)
-
-### ✨ [Demo](app.odu.edu.tr)
+> Ordu University for backend app
 
 ## Install
 
@@ -21,17 +22,22 @@
 npm install
 ```
 
-## Usage
+## 🚀 Usage
 
 ```sh
-yarn start
+npm start
+```
+
+## Run tests
+
+```sh
+npm run test
 ```
 
 ## Author
 
-👤 **Proinfinto and Baki Yanık**
+👤 **Proinfinto, Baki**
 
-* Website: https://www.kaggle.com/proinfinto
 * Twitter: [@TolgahanUmut](https://twitter.com/TolgahanUmut)
 * Github: [@Proinfinto](https://github.com/Proinfinto)
 
@@ -43,5 +49,10 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 Give a ⭐️ if this project helped you!
 
+## 📝 License
+
+Copyright © 2019 [Proinfinto](https://github.com/proinfinto).<br />
+This project is [MIT](https://github.com/oduweb/oduweb-backend/LICENSE) licensed.
+
 ***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+_This README was generated with ❤️ by [oduweb-backend](https://github.com/oduweb/oduweb-backend/)_
