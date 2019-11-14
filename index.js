@@ -1,4 +1,5 @@
 import express from 'express';
+import net from 'net';
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import cors from 'cors';
@@ -23,23 +24,51 @@ const logger = winston.createLogger(logConfiguration);
 
 const d = new Date();
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 logger.log({
-  Time: `[${days[d.getDay()].substring(0, 3)}, ${d.getDay()}, ${months[d.getMonth()].substring(0, 3)}, ${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} GTM]`,
+  Time: `[${days[d.getDay()].substring(0, 3)}, ${d.getDay()}, ${months[
+    d.getMonth()
+  ].substring(
+    0,
+    3,
+  )}, ${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} GTM]`,
   user: '[0]Administrator',
   message: 'Server starting..',
   level: 'info',
 });
 
-
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 
-const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
+const resolvers = mergeResolvers(
+  fileLoader(path.join(__dirname, './resolvers')),
+);
 
 const { ApolloServer } = require('apollo-server-express');
 
-const PORT = 8081;
+const PORT = 5001;
+const HOST = 'localhost';
 const PATH = '/graphql';
 
 const app = express();
@@ -54,7 +83,13 @@ const addUser = async (req, res, next) => {
       req.user = user;
     } catch (err) {
       const refreshToken = req.headers['x-refresh-token'];
-      const newTokens = await refreshTokens(token, refreshToken, models, SECRET, SECRET2);
+      const newTokens = await refreshTokens(
+        token,
+        refreshToken,
+        models,
+        SECRET,
+        SECRET2,
+      );
       if (newTokens.token && newTokens.refreshToken) {
         res.set('Access-Control-Expose-Headers', 'x-token, x-refresh-token');
         res.set('x-token', newTokens.token);
@@ -81,14 +116,13 @@ const server = new ApolloServer({
     user: req.user,
     SECRET,
     SECRET2,
-
   }),
   tracing: true,
 });
 
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${PATH}`));
+app.listen({ port: PORT, HOST }, () => console.log(`🚀 Server ready at http://${HOST}:${PORT}${PATH}`));
 
 /* sync =>
 force : Siler ve yeni tablo oluşturur.
