@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 const sequelize = new Sequelize('newDeepJupiter', 'postgres', '123qaz', {
   host: 'localhost',
   dialect: 'postgres',
-  logging: true,
+  logging: false,
 });
 
 const models = {
