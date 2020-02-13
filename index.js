@@ -74,13 +74,14 @@ const PATH = '/graphql';
 const app = express();
 
 app.use(cors('*'));
-
+/*
 const addUser = async (req, res, next) => {
   const token = req.headers['x-token'];
   if (token) {
     try {
       const { user } = jwt.verify(token, SECRET);
       req.user = user;
+      console.log(req.User);
     } catch (err) {
       const refreshToken = req.headers['x-refresh-token'];
       const newTokens = await refreshTokens(
@@ -96,12 +97,13 @@ const addUser = async (req, res, next) => {
         res.set('x-refresh-token', newTokens.refreshToken);
       }
       req.user = newTokens.user;
+      console.log('Test');
     }
   }
   next();
 };
 
-app.use(addUser);
+app.use(addUser); */
 
 const server = new ApolloServer({
   typeDefs,
